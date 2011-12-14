@@ -1,0 +1,37 @@
+{
+ "from" : 0, "size" : 3,
+ "fields" : [ "user.name", "user.screen_name", "created_at", "text", "description" ],
+ "query" : {
+    "custom_score" : {
+        "query" : {
+            "bool" : {
+                "must" : {
+                    "text" : { 
+                        "text" : {
+                            "query" : "never gonna leave this bed",
+                            "type" : "phrase",
+                            "slop" : 1
+                        }
+                    }
+                },
+                "should" : {
+                    "text" : { 
+                        "text" : {
+                            "query" : "maroon 5",
+                            "type" : "phrase",
+                            "slop" : 1
+                        }
+                    }
+                },
+                "boost" : 1.0
+            }
+        },
+        "params" : {
+            "a" : 0.08,
+            "b" : 0.05,
+            "m" : 0.000000000316
+        },
+        "script" : "_score * (a / (m * (new Date().getTime() - doc['created_at'].getValue()) + b ) )"
+    }
+ }
+}

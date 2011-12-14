@@ -1,0 +1,1 @@
+http://songfly-es1:9200/songfly_twitter_river/_search?q=text:never%20gonna%%20leave%20this%20bed&pretty=true&sort=created_at:desc
