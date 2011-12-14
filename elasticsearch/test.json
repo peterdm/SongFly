@@ -1,0 +1,11 @@
+{
+"query":{"custom_score":{"query":{"bool":{
+					"must":{"text":{"query":"never gonna leave this bed","type":"phrase","slop":1}},
+					"should":{"text":{"query":"maroon 5","type":"phrase","slop":1}},
+					"boost":1
+					}
+				 },
+			"script":"_score * (a / (m * (new Date().getTime() - doc['created_at'].getValue()) + b ) )"
+			}
+	}
+}

@@ -2,6 +2,73 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+h1 {
+  text-align: center;
+}
 a {
   color: #00b7ff;
+}
+input,
+textarea {
+  padding: 7px;
+  width: 120px;
+  border: solid 1px #e5e5e5;
+  outline: 0;
+  font: normal 13px/100% Verdana, Tahoma, sans-serif;
+  background: #fff;
+  margin-right: 5px;
+  box-shadow: rgba(0,0,0,0.10) 0px 0px 8px;
+  -moz-box-shadow: rgba(0,0,0,0.10) 0px 0px 8px;
+  -webkit-box-shadow: rgba(0,0,0,0.10) 0px 0px 8px;
+}
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus {
+  border-color: #c9c9c9;
+}
+input.submit {
+  width: 40px;
+  padding: 7px 15px;
+  background: #617798;
+  border: 0;
+  font-size: 14px;
+  color: #fff;
+  margin-left: 20px;
+}
+div#player {
+  background: none repeat scroll 0 0 lightGray;
+  margin: 50px 150px;
+  height: 350px;
+  width: 450px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -khtml-border-radius: 20px;
+  border-radius: 20px;
+  border: 3px ridge #bbb;
+  text-align: center;
+  padding-top: 10px;
+}
+div#trackinfo {
+  background: none repeat scroll 0 0 #dee;
+  border: 2px solid darkSlateBlue;
+  height: 35px;
+  margin: 10px 40px 40px 40px;
+  padding: 5px;
+  text-align: center;
+  float: left;
+  width: 350px;
+}
+div#fans {
+  width: 410px;
+}
+div#fans li {
+  list-style: none;
+  float: left;
+  display: inline-block;
+  font-size: 10px;
+}
+div#fans img {
+  width: 120px;
+  height: 120px;
 }
