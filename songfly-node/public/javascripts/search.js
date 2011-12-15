@@ -38,7 +38,7 @@ function searchQuery(song, artist) {
 }
 
 
-
+$(window).load( bindSubmit() );
 $(window).load( lookup() ); 
 	
 function lookup() {
@@ -53,7 +53,7 @@ function lookup() {
 				if (data.hits.total > 0) {
 					console.log(data.hits.total + " Hits!");
 					$.each(data.hits.hits, function(key, val) {
-						items.push('<li id="' + val.fields['user.screen_name'] + '"><div class="pic"><img src="http://api.twitter.com/1/users/profile_image?screen_name=' + val.fields['user.screen_name'] + '&size=bigger"/></div>' + val.fields['user.name'] + '</li>');
+						items.push('<li id="' + val.fields['user.screen_name'] + '"><div class="pic"><img src="http://api.twitter.com/1/users/profile_image?screen_name=' + val.fields['user.screen_name'] + '&size=bigger"/></div><div class="name">' + val.fields['user.name'] + '</div></li>');
 					});
 					console.log(items);
 				
@@ -62,4 +62,10 @@ function lookup() {
 						html: items.join('')
 					}).appendTo('div#fans');
 				}});
+}
+
+function bindSubmit() {
+	$('input.submit').click( function() {
+		lookup();
+	});
 }

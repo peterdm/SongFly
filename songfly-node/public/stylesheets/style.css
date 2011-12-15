@@ -72,3 +72,11 @@ div#fans img {
   width: 120px;
   height: 120px;
 }
+div.name {
+  background: #fff;
+  opacity: 0.8;
+  position: relative;
+  bottom: 16px;
+  margin: 0 2px;
+  width: 116px;
+}
