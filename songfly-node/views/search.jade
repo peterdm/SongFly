@@ -2,14 +2,14 @@
   p Now playing
   #trackinfo
    form(method="get", name="lookup")
-     input(type="text", name="artist", value=artist)
-     input(type="text", name="song", value=song)
+     input(type="text", name="artist", title="Artist...", value=artist)
+     input(type="text", name="song", title="Song...", value=song)
      input(type="submit", class="submit", value="go")
 
  
-
-  p Who Else is Listening?
-  #fans
+  #withyou
+    p Who's listening with you?
+    #fans
 
 
 

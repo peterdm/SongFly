@@ -59,12 +59,15 @@ div#trackinfo {
   float: left;
   width: 350px;
 }
+div#withyou {
+  display: none;
+}
 div#fans {
   width: 410px;
 }
 div#fans li {
   list-style: none;
-  float: left;
+  float: right;
   display: inline-block;
   font-size: 10px;
 }
@@ -79,4 +82,14 @@ div.name {
   bottom: 16px;
   margin: 0 2px;
   width: 116px;
+}
+div.ago {
+  font-style: italic;
+  color: #777;
+}
+.input-prompt {
+  position: absolute;
+  font-style: italic;
+  color: #aaa;
+  margin: 0.6em 0 0 0.6em;
 }

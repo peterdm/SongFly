@@ -53,7 +53,8 @@ function lookup() {
 				if (data.hits.total > 0) {
 					console.log(data.hits.total + " Hits!");
 					$.each(data.hits.hits, function(key, val) {
-						items.push('<li id="' + val.fields['user.screen_name'] + '"><div class="pic"><img src="http://api.twitter.com/1/users/profile_image?screen_name=' + val.fields['user.screen_name'] + '&size=bigger"/></div><div class="name">' + val.fields['user.name'] + '</div></li>');
+						console.log(val.fields);
+						items.push('<li id="' + val.fields['user.screen_name'] + '"><div class="ago">' + dateDiffMinutes(val.fields['created_at']) + '</div><div class="pic"><img src="http://api.twitter.com/1/users/profile_image?screen_name=' + val.fields['user.screen_name'] + '&size=bigger"/></div><div class="name">' + val.fields['user.name'] + '</div></li>');
 					});
 					console.log(items);
 				
@@ -61,8 +62,56 @@ function lookup() {
 						'class' : 'fan-list',
 						html: items.join('')
 					}).appendTo('div#fans');
+					$('#withyou').show();
+				} else {
+					$('#withyou').hide();
 				}});
 }
+
+function dateDiffMinutes(aDate)
+{
+	console.log(aDate);
+	var then = new Date(aDate);
+	var now = new Date();
+	var diff = Math.floor( (now.getTime() - then.getTime())/60000 );
+	
+	if (diff < 3) {
+		return "Listening Now!";
+	} else if (diff < 30) {
+		return diff + " minutes ago";
+	} else if (diff < 60) {
+		return "In the last hour";
+	} else if (diff < 60*24 && now.getDate() == then.getDate()) {
+		return "Earlier today";
+	} else if (diff < 60*24*7) {
+		return "Earlier this week";
+	}
+}
+
+$(document).ready(function(){
+  $('input[type=text][title],input[type=password][title],textarea[title]').each(function(i){
+    $(this).addClass('input-prompt-' + i);
+    var promptSpan = $('<span class="input-prompt"/>');
+    $(promptSpan).attr('id', 'input-prompt-' + i);
+    $(promptSpan).append($(this).attr('title'));
+    $(promptSpan).click(function(){
+      $(this).hide();
+      $('.' + $(this).attr('id')).focus();
+    });
+    if($(this).val() != ''){
+      $(promptSpan).hide();
+    }
+    $(this).before(promptSpan);
+    $(this).focus(function(){
+      $('#input-prompt-' + i).hide();
+    });
+    $(this).blur(function(){
+      if($(this).val() == ''){
+        $('#input-prompt-' + i).show();
+      }
+    });
+  });
+});
 
 function bindSubmit() {
 	$('input.submit').click( function() {
