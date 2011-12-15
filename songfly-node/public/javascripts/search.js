@@ -39,7 +39,7 @@ function searchQuery(song, artist) {
 
 
 $(window).load( bindSubmit() );
-$(window).load( lookup() ); 
+$(window).load( lookup() );
 	
 function lookup() {
 	var song = $('input[name=song]').val();
@@ -52,41 +52,38 @@ function lookup() {
 				var items = [];
 				if (data.hits.total > 0) {
 					console.log(data.hits.total + " Hits!");
+					
+					var list = $('<ul>').attr('class', 'fan-list');
+					
 					$.each(data.hits.hits, function(key, val) {
-						console.log(val.fields);
-						items.push('<li id="' + val.fields['user.screen_name'] + '"><div class="ago">' + dateDiffMinutes(val.fields['created_at']) + '</div><div class="pic"><img src="http://api.twitter.com/1/users/profile_image?screen_name=' + val.fields['user.screen_name'] + '&size=bigger"/></div><div class="name">' + val.fields['user.name'] + '</div></li>');
+						var created = 	$('<a/>').attr({
+								'title' : val.fields['created_at'],
+								'class' : 'ago'
+								}).text($.prettyDate.format(val.fields['created_at']));
+								
+						var image = $('<div>').attr('class', 'pic').html(
+										$('<img>').attr({
+											'src' : 'http://api.twitter.com/1/users/profile_image?screen_name=' + val.fields['user.screen_name'] + '&size=bigger',
+											'title' : val.fields['user.description']
+									}));
+						
+						var name = $('<div>').attr('class', 'name').text(val.fields['user.name']);
+															
+						var fan = $('<li>').attr('id', val.fields['user.screen_name']).html(created).append(image).append(name);
+						
+						list.append(fan);
 					});
-					console.log(items);
-				
-					$('<ul/>', {
-						'class' : 'fan-list',
-						html: items.join('')
-					}).appendTo('div#fans');
+					
+					list.appendTo('div#fans');
+
 					$('#withyou').show();
+					$(function() { $("a").prettyDate({ interval: 1000 }); });
 				} else {
 					$('#withyou').hide();
 				}});
 }
 
-function dateDiffMinutes(aDate)
-{
-	console.log(aDate);
-	var then = new Date(aDate);
-	var now = new Date();
-	var diff = Math.floor( (now.getTime() - then.getTime())/60000 );
-	
-	if (diff < 3) {
-		return "Listening Now!";
-	} else if (diff < 30) {
-		return diff + " minutes ago";
-	} else if (diff < 60) {
-		return "In the last hour";
-	} else if (diff < 60*24 && now.getDate() == then.getDate()) {
-		return "Earlier today";
-	} else if (diff < 60*24*7) {
-		return "Earlier this week";
-	}
-}
+
 
 $(document).ready(function(){
   $('input[type=text][title],input[type=password][title],textarea[title]').each(function(i){

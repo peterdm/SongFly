@@ -1,0 +1,16 @@
+{
+ "from" : 0, "size" : 3,
+ "fields" : [ "user.name", "user.screen_name", "created_at", "text", "description" ],
+ "query" : {
+    "custom_score" : {
+        "query" : { match_all: {}
+        },
+        "params" : {
+            "a" : 0.08,
+            "b" : 0.05,
+            "m" : 0.000000000316
+        },
+        "script" : "_score * (a / (m * (new Date().getTime() - doc['created_at'].getValue()) + b ) )"
+    }
+ }
+}

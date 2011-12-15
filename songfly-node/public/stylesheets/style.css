@@ -83,7 +83,7 @@ div.name {
   margin: 0 2px;
   width: 116px;
 }
-div.ago {
+a.ago {
   font-style: italic;
   color: #777;
 }
